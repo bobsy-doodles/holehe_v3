@@ -1,30 +1,51 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "holehe_v2"
-version = "1.0.0"
-description = "Check if an email is registered across platforms"
+name = "holehe-v2"
+version = "2.0.0"
+description = "Fast, async, and modular OSINT tool to check if an email is registered across multiple platforms."
 readme = "README.md"
-license = { file = "LICENSE" }
-requires-python = ">=3.10"
 authors = [
-    { name = "Anubhav Kashyap", email = "your@email.com" }
+    { name = "Anubhav Kashyap", email = "anubhavanonymous@://github.com" }
 ]
-keywords = ["osint", "email", "reconnaissance", "security"]
+license = { text = "MIT" }
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Topic :: Security",
 ]
+requires-python = ">=3.8"
 dependencies = [
-    "httpx>=0.27.0",
+    "httpx[http2]>=0.27.0",
+    "importfile>=0.1.1",
 ]
 
-[project.urls]
-Homepage = "https://github.com/anubhavanonymous/holehe_v2"
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "black>=24.0.0",
+    "flake8>=7.0.0",
+]
+
+[project.scripts]
+holehe_v2 = "holehe_v2.__main__:main"
 
 [tool.setuptools.packages.find]
-where = ["."]
-include = ["holehe_v2*"]
+include = ["holehe_v2", "holehe_v2.*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
